@@ -1,0 +1,35 @@
+<section class="welcome container">
+  <div class="row justify-content-center">
+    <div class="col-sm-6">
+      <div class="greet">
+        <h1>Welcome to DevTinder</h1>
+        <p>
+          DevTinder is a social networking platform for developers. Connect with
+          other developers, share your projects, and find new opportunities.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Features</h2>
+      <ul>
+        <li>Connect with other developers</li>
+        <li>Share your projects</li>
+        <li>Find new opportunities</li>
+        <li>Join a community of like-minded individuals</li>
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <h2>Get Started</h2>
+      <p>
+        Already have an account? Please
+        <a [routerLink]="['/auth', 'login']">login</a> to your account.
+      </p>
+      <p>
+        Not registered yet? Please
+        <a [routerLink]="['/auth', 'register']">register</a> here.
+      </p>
+    </div>
+  </div>
+</section>
