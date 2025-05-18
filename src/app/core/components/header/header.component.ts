@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
+
+import { IUser } from 'src/app/models/user.model';
+import { UserState } from 'src/app/store/users/user.reducers';
+import { loggedInUser } from 'src/app/store/users/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -7,26 +13,34 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  // currentUser: IUser | null = null;
-  currentUser: any;
+  currentUser$?: Observable<IUser | null>;
+  currentUser: IUser | null = null;
   isLoggedIn = false;
 
   constructor(
-    // private userService: UserService,
-    // private apiService: ApiService,
-    // private authService: AuthService,
+    private store: Store<UserState>,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // this.userService.getCurrentUser().subscribe({
-    //   next: (user) => {
-    //     console.log('user', user);
-    //     this.currentUser = user;
-    //     this.isLoggedIn = !!user;
-    //   },
-    // });
+    this.currentUser$ = this.store.select(loggedInUser).pipe(
+      map((userData: any) => userData.user),
+      tap((user) => {
+        console.log(user);
+      }),
+      catchError((err) => throwError(err))
+    );
+    this.currentUser$.subscribe(
+      (user: any) => {
+        this.currentUser = user;
+        this.isLoggedIn = !!this.currentUser;
+      },
+      (err) => {
+        this.currentUser = null;
+        this.isLoggedIn = false;
+      }
+    );
   }
 
   onLogout(): void {
