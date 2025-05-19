@@ -26,9 +26,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentUser$ = this.store
-      .select(loggedInUser)
-      .pipe(map((userData: UserState) => userData.user));
+    this.currentUser$ = this.store.select(loggedInUser);
     this.currentUser$.subscribe(
       (user: IUser | null) => {
         if (user) {

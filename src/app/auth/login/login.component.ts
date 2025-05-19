@@ -53,22 +53,18 @@ export class LoginComponent {
         Validators.minLength(6),
       ]),
     });
-    this.store
-      .select(loggedInUser)
-      .pipe(map((data: UserState) => data.user))
-      .subscribe((user: IUser | null) => {
-        if (user) {
-          this.router.navigate(['../../feeds'], {
-            relativeTo: this.route,
-          });
-        } else {
-        }
-      });
+    this.store.select(loggedInUser).subscribe((user: IUser | null) => {
+      if (user) {
+        this.router.navigate(['../../feeds'], {
+          relativeTo: this.route,
+        });
+      } else {
+      }
+    });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.store.dispatch(loginUser({ userCredentials: this.loginForm.value }));
     } else {
       console.log('Form is invalid');

@@ -7,23 +7,18 @@ import {
   removeUserFailure,
   removeUserSuccess,
 } from './user.actions';
-
-export enum UserStatus {
-  Pending = 'pending',
-  Success = 'success',
-  Failed = 'failed',
-}
+import { SliceStatus } from '../state.interfaces';
 
 export interface UserState {
   user: IUser | null;
   message: string | null;
-  status: UserStatus;
+  status: SliceStatus;
 }
 
-export const initialState: UserState = {
+const initialState: UserState = {
   user: null,
   message: null,
-  status: UserStatus.Pending,
+  status: SliceStatus.Pending,
 };
 
 export const userReducer = createReducer(
@@ -32,24 +27,24 @@ export const userReducer = createReducer(
     ...state,
     user: { ...data },
     message,
-    status: UserStatus.Success,
+    status: SliceStatus.Success,
   })),
   on(addUserFailure, (state, { message }) => ({
     ...state,
     user: null,
     message,
-    status: UserStatus.Failed,
+    status: SliceStatus.Failed,
   })),
   on(removeUserSuccess, (state, { message }) => ({
     ...state,
     user: null,
     message: message,
-    status: UserStatus.Success,
+    status: SliceStatus.Success,
   })),
   on(removeUserFailure, (state, { message }) => ({
     ...state,
     user: null,
     message: message,
-    status: UserStatus.Failed,
+    status: SliceStatus.Failed,
   }))
 );

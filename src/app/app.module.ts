@@ -14,6 +14,8 @@ import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { userReducer } from './store/users/user.reducers';
 import { UserEffects } from './store/users/user.effects';
+import { feedEffects } from './store/feeds/feed.effects';
+import { feedsReducer } from './store/feeds/feed.reducers';
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent],
@@ -23,8 +25,8 @@ import { UserEffects } from './store/users/user.effects';
     HttpClientModule,
     CoreModule,
     AuthModule,
-    StoreModule.forRoot({ user: userReducer }),
-    EffectsModule.forRoot([UserEffects]),
+    StoreModule.forRoot({ user: userReducer, feeds: feedsReducer }),
+    EffectsModule.forRoot([UserEffects, feedEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [ApiService, AuthService],
