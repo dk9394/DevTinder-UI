@@ -13,13 +13,13 @@ import { selectFeeds } from '../store/feeds/feed.selectors';
 })
 export class FeedsComponent implements OnInit {
   feeds: IUser[] = [];
+
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(addFeeds());
     this.store.select(selectFeeds).subscribe((feeds: IUser[]) => {
       this.feeds = feeds;
-      console.log('Feeds', this.feeds);
     });
   }
 }
