@@ -35,6 +35,6 @@ export class AuthService {
   }
 
   logout(): Observable<ILogoutResponse> {
-    return this.apiService.post(this.authEndpoints.signup, {});
+    return this.apiService.post(this.authEndpoints.logout, {});
   }
 }

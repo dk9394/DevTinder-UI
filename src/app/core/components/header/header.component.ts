@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+
+import { IUser } from 'src/app/models/user.model';
+import { AppState } from 'src/app/store/app.state';
+import { logoutUser } from 'src/app/store/users/user.actions';
+import { UserState } from 'src/app/store/users/user.reducers';
+import { loggedInUser } from 'src/app/store/users/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -7,36 +15,36 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  // currentUser: IUser | null = null;
-  currentUser: any;
+  currentUser$?: Observable<IUser | null>;
+  currentUser: IUser | null = null;
   isLoggedIn = false;
 
   constructor(
-    // private userService: UserService,
-    // private apiService: ApiService,
-    // private authService: AuthService,
+    private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // this.userService.getCurrentUser().subscribe({
-    //   next: (user) => {
-    //     console.log('user', user);
-    //     this.currentUser = user;
-    //     this.isLoggedIn = !!user;
-    //   },
-    // });
+    this.currentUser$ = this.store.select(loggedInUser);
+    this.currentUser$.subscribe(
+      (user: IUser | null) => {
+        if (user) {
+          this.currentUser = user;
+          this.isLoggedIn = !!this.currentUser;
+        } else {
+          this.isLoggedIn = false;
+          this.router.navigate(['../'], { relativeTo: this.route });
+        }
+      },
+      (err) => {
+        this.currentUser = null;
+        this.isLoggedIn = false;
+      }
+    );
   }
 
   onLogout(): void {
-    // this.authService.logout().subscribe({
-    //   next: (res) => {
-    //     this.userService.clearCurrentUser();
-    //     this.isLoggedIn = false;
-    //     this.apiService.clearToken();
-    //     this.router.navigate(['../'], { relativeTo: this.route });
-    //   },
-    // });
+    this.store.dispatch(logoutUser());
   }
 }

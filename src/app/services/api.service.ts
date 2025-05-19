@@ -7,6 +7,8 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
+
 interface IHttpOptions {
   headers?: HttpHeaders;
   context?: HttpContext;
@@ -21,7 +23,7 @@ interface IHttpOptions {
   providedIn: 'root',
 })
 export class ApiService {
-  apiURL: string = 'http://localhost:3000';
+  apiURL: string = environment.api;
 
   constructor(private http: HttpClient) {}
 
@@ -78,13 +80,38 @@ export class ApiService {
   private setHttpMethodOptions(options: IHttpOptions = {}): IHttpOptions {
     const finalOptions: IHttpOptions = {};
 
-    finalOptions.headers = new HttpHeaders({ ...options.headers });
-    // finalOptions.context = new HttpContext({...options.context});
-    finalOptions.observe = options.observe;
-    finalOptions.params = new HttpParams({ ...options.params });
-    finalOptions.reportProgress = options.reportProgress;
-    finalOptions.responseType = options.responseType;
-    finalOptions.withCredentials = options.withCredentials;
+    Object.keys(options).forEach((key) => {
+      switch (key) {
+        case 'headers': {
+          finalOptions.headers = new HttpHeaders({ ...options.headers });
+          break;
+        }
+        case 'params': {
+          finalOptions.params = new HttpParams({ ...options.params });
+          break;
+        }
+        case 'context': {
+          // finalOptions.context = new HttpContext({ ...options.context });
+          break;
+        }
+        case 'observe': {
+          finalOptions.observe = options.observe;
+          break;
+        }
+        case 'reportProgress': {
+          finalOptions.reportProgress = options.reportProgress;
+          break;
+        }
+        case 'responseType': {
+          finalOptions.responseType = options.responseType;
+          break;
+        }
+        case 'withCredentials': {
+          finalOptions.withCredentials = options.withCredentials;
+          break;
+        }
+      }
+    });
 
     return finalOptions;
   }
