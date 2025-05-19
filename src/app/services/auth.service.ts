@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 import { ApiService } from './api.service';
 import {
@@ -16,8 +16,10 @@ import {
 export class AuthService {
   private _TOKEN: string | null = null;
 
-  get isAuthorizedUser(): boolean {
-    return !!this.getToken();
+  private _isAuthorizedUser$ = new BehaviorSubject<boolean>(false);
+
+  get isAuthorizedUser(): Observable<boolean> {
+    return this._isAuthorizedUser$.asObservable();
   }
 
   private get _auth() {
@@ -35,12 +37,7 @@ export class AuthService {
   login(payload: ILoginCredentials): Observable<ILoginResponse> {
     return this.apiService
       .post<ILoginResponse>(this.authEndpoints.login, payload)
-      .pipe(
-        tap(() => {
-          const authToken = this.getTokenFromCookie('token');
-          this.setToken(authToken);
-        })
-      );
+      .pipe(tap(() => this.setUserStatus()));
   }
 
   register(payload: ISignupData): Observable<ISignupResponse> {
@@ -51,11 +48,23 @@ export class AuthService {
   }
 
   logout(): Observable<ILogoutResponse> {
-    return this.apiService.post<ISignupResponse>(this.authEndpoints.logout, {});
+    return this.apiService
+      .post<ISignupResponse>(this.authEndpoints.logout, {})
+      .pipe(
+        tap(() => {
+          this.setUserStatus();
+        })
+      );
   }
 
   getToken(): string | null {
     return this._TOKEN;
+  }
+
+  setUserStatus(): void {
+    const authToken = this.getTokenFromCookie('token');
+    this._isAuthorizedUser$.next(!!authToken);
+    this.setToken(authToken);
   }
 
   private setToken(token: string | null): void {

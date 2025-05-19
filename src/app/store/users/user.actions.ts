@@ -4,6 +4,7 @@ import { ILoginCredentials } from 'src/app/models/auth.model';
 import { IUser } from 'src/app/models/user.model';
 
 const LOGIN_USER = '[USER] Login User';
+const ADD_USER_ON_APP_LOAD = '[USER] Add User On App Load';
 const ADD_USER_SUCCESS = '[USER] Add loggedIn User Success';
 const ADD_USER_FAILURE = '[USER] Add loggedIn User Failure';
 
@@ -15,6 +16,8 @@ export const loginUser = createAction(
   LOGIN_USER,
   props<{ userCredentials: ILoginCredentials }>()
 );
+
+export const loadUserOnAppLoad = createAction(ADD_USER_ON_APP_LOAD);
 
 export const addUserSuccess = createAction(
   ADD_USER_SUCCESS,
