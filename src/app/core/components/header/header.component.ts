@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { IUser } from 'src/app/models/user.model';
+import { AppState } from 'src/app/store/app.state';
+import { logoutUser } from 'src/app/store/users/user.actions';
 import { UserState } from 'src/app/store/users/user.reducers';
 import { loggedInUser } from 'src/app/store/users/user.selectors';
 
@@ -18,23 +20,24 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
 
   constructor(
-    private store: Store<UserState>,
+    private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.currentUser$ = this.store.select(loggedInUser).pipe(
-      map((userData: any) => userData.user),
-      tap((user) => {
-        console.log(user);
-      }),
-      catchError((err) => throwError(err))
-    );
+    this.currentUser$ = this.store
+      .select(loggedInUser)
+      .pipe(map((userData: UserState) => userData.user));
     this.currentUser$.subscribe(
-      (user: any) => {
-        this.currentUser = user;
-        this.isLoggedIn = !!this.currentUser;
+      (user: IUser | null) => {
+        if (user) {
+          this.currentUser = user;
+          this.isLoggedIn = !!this.currentUser;
+        } else {
+          this.isLoggedIn = false;
+          this.router.navigate(['../'], { relativeTo: this.route });
+        }
       },
       (err) => {
         this.currentUser = null;
@@ -44,13 +47,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(): void {
-    // this.authService.logout().subscribe({
-    //   next: (res) => {
-    //     this.userService.clearCurrentUser();
-    //     this.isLoggedIn = false;
-    //     this.apiService.clearToken();
-    //     this.router.navigate(['../'], { relativeTo: this.route });
-    //   },
-    // });
+    this.store.dispatch(logoutUser());
   }
 }

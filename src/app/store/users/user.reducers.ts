@@ -1,32 +1,55 @@
-import { ILoginResponse } from './../../models/auth.model';
 import { createReducer, on } from '@ngrx/store';
+
 import { IUser } from 'src/app/models/user.model';
-import { addUserFailure, addUserSuccess } from './user.actions';
+import {
+  addUserFailure,
+  addUserSuccess,
+  removeUserFailure,
+  removeUserSuccess,
+} from './user.actions';
+
+export enum UserStatus {
+  Pending = 'pending',
+  Success = 'success',
+  Failed = 'failed',
+}
 
 export interface UserState {
   user: IUser | null;
-  error: string | null;
-  // message?: string;
-  // userMessage?: string;
-  // status?: number;
-  // expiresAt?: string;
+  message: string | null;
+  status: UserStatus;
 }
 
 export const initialState: UserState = {
   user: null,
-  error: null,
+  message: null,
+  status: UserStatus.Pending,
 };
 
 export const userReducer = createReducer(
   initialState,
-  on(addUserSuccess, (state, { user }) => ({
+  on(addUserSuccess, (state, { data, message }) => ({
     ...state,
-    user,
-    error: null,
+    user: { ...data },
+    message,
+    status: UserStatus.Success,
   })),
-  on(addUserFailure, (state, { error }) => ({
+  on(addUserFailure, (state, { message }) => ({
     ...state,
     user: null,
-    error: error,
+    message,
+    status: UserStatus.Failed,
+  })),
+  on(removeUserSuccess, (state, { message }) => ({
+    ...state,
+    user: null,
+    message: message,
+    status: UserStatus.Success,
+  })),
+  on(removeUserFailure, (state, { message }) => ({
+    ...state,
+    user: null,
+    message: message,
+    status: UserStatus.Failed,
   }))
 );

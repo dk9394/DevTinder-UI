@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { UserState } from './user.reducers';
 
-export const selectUser = (state: UserState) => state.user;
+import { AppState } from '../app.state';
+
+export const selectUser = (state: AppState) => state.user;
 export const loggedInUser = createSelector(selectUser, (user) => user);

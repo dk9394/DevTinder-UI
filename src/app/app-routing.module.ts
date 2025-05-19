@@ -8,6 +8,11 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
+  {
+    path: 'feeds',
+    loadChildren: () =>
+      import('./feeds/feeds.module').then((m) => m.FeedsModule),
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', redirectTo: 'welcome' },

@@ -7,9 +7,11 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
 
-import { AuthService } from 'src/app/services/auth.service';
-import { addUser } from 'src/app/store/users/user.actions';
+import { IUser } from 'src/app/models/user.model';
+import { AppState } from 'src/app/store/app.state';
+import { loginUser } from 'src/app/store/users/user.actions';
 import { UserState } from 'src/app/store/users/user.reducers';
 import { loggedInUser } from 'src/app/store/users/user.selectors';
 
@@ -22,14 +24,10 @@ export class LoginComponent {
   loginForm!: FormGroup;
 
   constructor(
-    private store: Store<UserState>,
+    private store: Store<AppState>,
     private fb: FormBuilder,
-    // private apiService: ApiService,
-    // private userService: UserService,
-    // private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService
+    private route: ActivatedRoute
   ) {}
 
   get emailIdField() {
@@ -55,29 +53,23 @@ export class LoginComponent {
         Validators.minLength(6),
       ]),
     });
-    this.store.select(loggedInUser).subscribe((data) => {
-      // console.log('Data from store: ', data);
-    });
+    this.store
+      .select(loggedInUser)
+      .pipe(map((data: UserState) => data.user))
+      .subscribe((user: IUser | null) => {
+        if (user) {
+          this.router.navigate(['../../feeds'], {
+            relativeTo: this.route,
+          });
+        } else {
+        }
+      });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      this.store.dispatch(addUser({ userCredentials: this.loginForm.value }));
-      // .subscribe(
-      //   (response: any) => {
-      //     console.log('Login response: ', response);
-      //     // const user = new User(response.data);
-      //     // this.userService.setCurrentUser(user);
-      //     // this.apiService.setTokenAndExpiry(response.expiresAt);
-      //     // this.router.navigate(['../../feeds'], {
-      //     //   relativeTo: this.route,
-      //     // });
-      //   },
-      //   (err) => {
-      //     console.log(err);
-      //   }
-      // );
+      this.store.dispatch(loginUser({ userCredentials: this.loginForm.value }));
     } else {
       console.log('Form is invalid');
     }
