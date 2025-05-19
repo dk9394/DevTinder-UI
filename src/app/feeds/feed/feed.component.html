@@ -1,1 +1,22 @@
-<p>feed works!</p>
+<div class="card" *ngIf="!!feed">
+  <div class="profile-image">
+    <div class="image-wrapper">
+      <img
+        [src]="feed.profileIconUrl"
+        class="card-img-top"
+        [alt]="feed.firstName"
+      />
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ feed.firstName }} {{ feed.lastName }}</h5>
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+    <div class="card-actions">
+      <button type="button" class="btn btn-success">Interested</button>
+      <button type="button" class="btn btn-danger">Ignore</button>
+    </div>
+  </div>
+</div>
