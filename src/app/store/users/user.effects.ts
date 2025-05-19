@@ -9,13 +9,20 @@ import {
   logoutUser,
   removeUserSuccess,
   removeUserFailure,
+  loadUserOnAppLoad,
 } from './user.actions';
 import { ILoginResponse, ILogoutResponse } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { IUserResponse } from 'src/app/models/user.model';
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   loadUser$ = createEffect(() => {
     return this.actions$.pipe(
@@ -26,6 +33,26 @@ export class UserEffects {
             return addUserSuccess({
               data: loginResponse.data,
               message: loginResponse.userMessage,
+            });
+          }),
+          catchError((error) => {
+            return of(addUserFailure({ message: error.message }));
+          })
+        );
+      })
+    );
+  });
+
+  loadUserOnAppLoad$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadUserOnAppLoad),
+      switchMap((action) => {
+        return this.userService.fetchProfile().pipe(
+          map((userResponse: IUserResponse) => {
+            this.authService.setUserStatus();
+            return addUserSuccess({
+              data: userResponse.data,
+              message: userResponse.userMessage,
             });
           }),
           catchError((error) => {

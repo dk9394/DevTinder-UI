@@ -14,4 +14,6 @@ export interface IUser {
   updatedAt: string;
 }
 
+export interface IUserResponse extends IApiResponse<IUser> {}
+
 export interface IFeedsResponse extends IApiResponse<IUser[]> {}

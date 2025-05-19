@@ -20,7 +20,7 @@
         <li>Join a community of like-minded individuals</li>
       </ul>
     </div>
-    <div class="col-sm-6">
+    <div *ngIf="!(isAuthorizedUser$ | async)" class="col-sm-6">
       <h2>Get Started</h2>
       <p>
         Already have an account? Please
