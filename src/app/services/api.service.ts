@@ -23,14 +23,14 @@ interface IHttpOptions {
   providedIn: 'root',
 })
 export class ApiService {
-  apiURL: string = environment.api;
+  private apiURL: string = environment.api;
 
   constructor(private http: HttpClient) {}
 
   get<T>(endpoint: string, options: IHttpOptions = {}): Observable<T> {
     return this.http.get<T>(
-      this.setUrl(endpoint),
-      this.setHttpMethodOptions(options)
+      this.setUrl(endpoint)
+      // this.setHttpMethodOptions(options)
     );
   }
 
@@ -41,8 +41,8 @@ export class ApiService {
   ): Observable<T> {
     return this.http.post<T>(
       this.setUrl(endpoint),
-      payload,
-      this.setHttpMethodOptions(options)
+      payload
+      // this.setHttpMethodOptions(options)
     );
   }
 
@@ -53,8 +53,8 @@ export class ApiService {
   ): Observable<T> {
     return this.http.put<T>(
       this.setUrl(endpoint),
-      payload,
-      this.setHttpMethodOptions(options)
+      payload
+      // this.setHttpMethodOptions(options)
     );
   }
 
@@ -65,15 +65,15 @@ export class ApiService {
   ): Observable<T> {
     return this.http.patch<T>(
       this.setUrl(endpoint),
-      payload,
-      this.setHttpMethodOptions(options)
+      payload
+      // this.setHttpMethodOptions(options)
     );
   }
 
   delete<T>(endpoint: string, options: IHttpOptions = {}): Observable<T> {
     return this.http.delete<T>(
-      this.setUrl(endpoint),
-      this.setHttpMethodOptions(options)
+      this.setUrl(endpoint)
+      // this.setHttpMethodOptions(options)
     );
   }
 
