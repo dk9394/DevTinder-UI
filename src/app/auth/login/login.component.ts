@@ -7,12 +7,10 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
 
 import { IUser } from 'src/app/models/user.model';
 import { AppState } from 'src/app/store/app.state';
 import { loginUser } from 'src/app/store/users/user.actions';
-import { UserState } from 'src/app/store/users/user.reducers';
 import { loggedInUser } from 'src/app/store/users/user.selectors';
 
 @Component({

@@ -8,7 +8,7 @@ import { IFeedsResponse } from '../models/user.model';
   providedIn: 'root',
 })
 export class FeedsService {
-  get _feeds() {
+  private get _feeds() {
     return '/feeds';
   }
 
