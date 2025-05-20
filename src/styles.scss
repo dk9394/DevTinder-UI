@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700");
+
+$theme-color: rgb(33, 37, 41);
+$primary-btn-bg: darken(
+  $color: orange,
+  $amount: 15%,
+);
+
+body {
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  color: #fff;
+  text-shadow: 0 0 3px $theme-color;
+
+  a {
+    color: orange;
+  }
+}
+
+.container {
+  min-width: 500px;
+}
+
+.btn-primary {
+  background-color: $primary-btn-bg;
+  border: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: darken($color: $primary-btn-bg, $amount: 10%);
+  }
+}
+
+.form-wrapper {
+  background: rgba($color: $theme-color, $alpha: 0.8);
+  border-radius: 15px;
+  box-shadow: 0 0 30px $theme-color;
+  padding: 30px;
+  margin-bottom: 30px;
+
+  h1 {
+    text-align: center;
+    margin: 10px 0 50px;
+  }
+
+  .form-label {
+    color: rgba($color: #fff, $alpha: 0.5);
+    margin-bottom: 10px;
+  }
+
+  .form-buttons {
+    margin: 40px 0 30px;
+    text-align: center;
+
+    .btn {
+      min-width: 200px;
+    }
+  }
+}

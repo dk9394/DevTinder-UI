@@ -1,3 +1,5 @@
+@import "../styles.scss";
+
 .app {
   display: flex;
   flex-direction: column;
@@ -5,10 +7,15 @@
 
   .app-main {
     flex: 1;
-    padding: 50px 0;
+    background: rgba($color: $theme-color, $alpha: 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .app-footer {
+    background: rgba($color: $theme-color, $alpha: 0.9);
+    color: #fff;
     hr {
       margin: 0;
     }

@@ -1,5 +1,15 @@
+@import "./../../../../styles.scss";
+
 .navbar-collapse {
   justify-content: flex-end;
+
+  &.loggedIn {
+    justify-content: space-between;
+  }
+}
+
+.navbar-brand {
+  color: orange;
 }
 
 .profile-dropdown {
@@ -21,4 +31,22 @@
 
 .logout {
   cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color: lighten($color: $theme-color, $amount: 12%);
+
+  a {
+    color: #fff;
+
+    &:hover {
+      background-color: lighten($color: $theme-color, $amount: 5%);
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .regular-nav-links {
+    margin-left: 50px;
+  }
 }

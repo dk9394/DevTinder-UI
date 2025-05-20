@@ -1,22 +1,36 @@
 <div class="card" *ngIf="!!feed">
   <div class="profile-image">
-    <div class="image-wrapper">
-      <img
-        [src]="feed.profileIconUrl"
-        class="card-img-top"
-        [alt]="feed.firstName"
-      />
-    </div>
+    <img
+      [src]="feed.profileIconUrl"
+      class="card-img-top"
+      [alt]="feed.firstName"
+    />
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ feed.firstName }} {{ feed.lastName }}</h5>
-    <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+    <h6 class="age-gender">
+      <span *ngIf="feed.age">{{ feed.age }} Yrs,</span>
+      {{ feed.gender | titlecase }}
+    </h6>
+    <p class="about-me">
+      {{ feed.about }}
     </p>
+    <div class="badges">
+      <span *ngFor="let skill of feed.skills" class="badge bg-secondary">{{
+        skill
+      }}</span>
+    </div>
     <div class="card-actions">
-      <button type="button" class="btn btn-success">Interested</button>
-      <button type="button" class="btn btn-danger">Ignore</button>
+      <button
+        type="button"
+        class="btn btn-lg btn-success"
+        (click)="onInterested()"
+      >
+        Interested
+      </button>
+      <button type="button" class="btn btn-lg btn-danger" (click)="onIgnore()">
+        Ignore
+      </button>
     </div>
   </div>
 </div>
