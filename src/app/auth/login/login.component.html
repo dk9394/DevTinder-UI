@@ -1,9 +1,9 @@
-<section class="login container">
-  <div class="form-wrapper">
-    <div class="row">
-      <div class="col">
-        <h1>Login</h1>
-        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+<app-placeholder>
+  <ng-container header>Login</ng-container>
+  <ng-container main>
+    <form form-body (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+      <app-form-details-container>
+        <ng-container form-body>
           <div class="mb-3">
             <label for="loginEmailId" class="form-label">Email</label>
             <input
@@ -46,41 +46,23 @@
               </span>
             </div>
           </div>
-          <div class="form-buttons">
-            <button
-              type="submit"
-              class="btn btn-lg btn-primary"
-              [disabled]="!loginForm.valid"
-            >
-              Login
-            </button>
-          </div>
-
-          <!-- <button type="button" (click)="onToastShow()">Show Toast</button> -->
-
-          <!-- <p>{{ expiresAt | date : "h:mm a" }}</p> -->
-        </form>
-      </div>
-    </div>
-  </div>
-  <p class="text-center">
-    Not a member yet? Please
-    <a [routerLink]="['../', 'register']">register</a> here.
-  </p>
-</section>
-<!-- <div
-  class="toast align-items-center text-white bg-primary border-0"
-  role="alert"
-  aria-live="assertive"
-  aria-atomic="true"
->
-  <div class="d-flex">
-    <div class="toast-body">Hello, world! This is a toast message.</div>
-    <button
-      type="button"
-      class="btn-close btn-close-white me-2 m-auto"
-      data-bs-dismiss="toast"
-      aria-label="Close"
-    ></button>
-  </div>
-</div> -->
+        </ng-container>
+        <ng-container form-footer>
+          <button
+            type="submit"
+            class="btn btn-lg"
+            [disabled]="!loginForm.valid"
+          >
+            Login
+          </button>
+        </ng-container>
+      </app-form-details-container>
+    </form>
+  </ng-container>
+  <ng-container footer>
+    <p class="text-center">
+      Not a member yet? Please
+      <a [routerLink]="['../', 'register']">register</a> here.
+    </p>
+  </ng-container>
+</app-placeholder>

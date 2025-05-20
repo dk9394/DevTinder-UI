@@ -1,9 +1,7 @@
-<div class="container">
-  <div class="card-group">
-    <app-feed
-      class="feed"
-      [feed]="feed"
-      (onUserInteraction)="setNextFeed()"
-    ></app-feed>
-  </div>
+<div class="feeds container">
+  <app-feed
+    class="feed"
+    [feed]="feed"
+    (onUserInteraction)="setNextFeed()"
+  ></app-feed>
 </div>

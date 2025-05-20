@@ -1,61 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,500");
 
 $theme-color: rgb(33, 37, 41);
-$primary-btn-bg: darken(
-  $color: orange,
-  $amount: 15%,
-);
+$theme-color-light-1: lighten($theme-color, 5%);
+$theme-color-light-2: lighten($theme-color, 10%);
+$theme-color-light-3: lighten($theme-color, 15%);
+$theme-color-light-4: lighten($theme-color, 20%);
+$theme-color-light-5: lighten($theme-color, 25%);
+
+$light-color: #fff;
+$light-color-dark-1: darken($light-color, 5%);
+$light-color-dark-2: darken($light-color, 10%);
+$light-color-dark-3: darken($light-color, 15%);
+$light-color-dark-4: darken($light-color, 20%);
+$light-color-dark-5: darken($light-color, 55%);
+
+$theme2-color: orange;
+$theme2-color-dark-1: darken($theme2-color, 5%);
+$theme2-color-dark-2: darken($theme2-color, 10%);
+$theme2-color-dark-3: darken($theme2-color, 15%);
+$theme2-color-dark-4: darken($theme2-color, 20%);
+$theme2-color-dark-5: darken($theme2-color, 25%);
+$theme2-color-dark-6: darken($theme2-color, 30%);
+$theme2-color-dark-7: darken($theme2-color, 35%);
+
+html {
+  font-size: 16px;
+}
 
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  font-weight: 300;
-  color: #fff;
-  text-shadow: 0 0 3px $theme-color;
+  font-weight: 200;
+  color: $light-color;
+  font-size: 100%;
 
   a {
-    color: orange;
+    color: $theme2-color-dark-1;
   }
 }
 
-.container {
-  min-width: 500px;
+$button-color: $light-color-dark-1;
+$button-background: $theme2-color-dark-5;
+$button-background-darker: $theme2-color-dark-6;
+
+@mixin btn {
+  background-color: $button-background;
+  color: $button-color;
+  border: none;
+  box-shadow: 0 0 0.5rem $theme-color;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $button-background-darker !important;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
-.btn-primary {
-  background-color: $primary-btn-bg;
+.btn {
+  @include btn;
+}
+
+.btn-holo {
+  @include btn;
+  background: $button-color;
+  color: $button-background;
+  box-shadow: none;
   border: none;
 
   &:hover,
   &:active,
   &:focus {
-    background-color: darken($color: $primary-btn-bg, $amount: 10%);
-  }
-}
-
-.form-wrapper {
-  background: rgba($color: $theme-color, $alpha: 0.8);
-  border-radius: 15px;
-  box-shadow: 0 0 30px $theme-color;
-  padding: 30px;
-  margin-bottom: 30px;
-
-  h1 {
-    text-align: center;
-    margin: 10px 0 50px;
-  }
-
-  .form-label {
-    color: rgba($color: #fff, $alpha: 0.5);
-    margin-bottom: 10px;
-  }
-
-  .form-buttons {
-    margin: 40px 0 30px;
-    text-align: center;
-
-    .btn {
-      min-width: 200px;
-    }
+    background: darken($button-color, 20%) !important;
+    color: $button-background !important;
   }
 }

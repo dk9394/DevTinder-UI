@@ -1,9 +1,9 @@
-<section class="register container">
-  <div class="form-wrapper">
-    <div class="row">
-      <div class="col">
-        <h1>Register</h1>
-        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+<app-placeholder>
+  <ng-container header>Register</ng-container>
+  <ng-container main>
+    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <app-form-details-container>
+        <ng-container form-body>
           <div class="mb-3">
             <label for="registerFirstName" class="form-label">First Name</label>
             <input
@@ -123,21 +123,23 @@
               </span>
             </div>
           </div>
-          <div class="form-buttons">
-            <button
-              type="submit"
-              class="btn btn-lg btn-primary"
-              [disabled]="!registerForm.valid"
-            >
-              Register
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <p class="text-center">
-    Already have an account? Please
-    <a [routerLink]="['../', 'login']">Login</a> here.
-  </p>
-</section>
+        </ng-container>
+        <ng-container form-footer>
+          <button
+            type="submit"
+            class="btn btn-lg"
+            [disabled]="!registerForm.valid"
+          >
+            Register
+          </button>
+        </ng-container>
+      </app-form-details-container>
+    </form>
+  </ng-container>
+  <ng-container footer>
+    <p class="text-center">
+      Already have an account? Please
+      <a [routerLink]="['../', 'login']">Login</a> here.
+    </p>
+  </ng-container>
+</app-placeholder>

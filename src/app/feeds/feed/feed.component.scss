@@ -1,14 +1,15 @@
 @import "../../../styles.scss";
 
-.card {
-  background: rgba($color: $theme-color, $alpha: 0.8);
-  color: #fff;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 0 30px $theme-color;
-  overflow: hidden;
+$age-gender-color: $light-color-dark-4;
+$badge-background: $theme-color-light-3;
 
-  .profile-image {
+.highlight {
+  color: $theme2-color-dark-3;
+}
+
+.feed {
+  .picture {
+    max-height: 600px;
     overflow: hidden;
 
     img {
@@ -16,51 +17,58 @@
     }
   }
 
-  .card-title {
-    font-size: 30px;
-  }
+  .feed-body {
+    padding: 2rem;
 
-  .card-body {
-    padding: 30px;
+    .title {
+      font-size: 2rem;
+      font-weight: 300;
+      margin: 0 0 0.5rem;
+    }
 
     .age-gender {
-      font-size: 14px;
-      color: rgba($color: #fff, $alpha: 0.5);
+      font-size: 0.75rem;
+      color: $age-gender-color;
+      margin: 0 0 2rem 0;
+
+      .age {
+        margin-right: 0.5rem;
+      }
     }
 
-    .about-me {
-      margin: 30px 0;
-      color: rgba($color: #fff, $alpha: 0.9);
+    .about {
+      font-weight: 300;
+      margin-bottom: 1rem;
     }
 
-    .card-actions {
-      margin-top: 30px;
+    .badges {
+      margin-bottom: 2rem;
+
+      .badge {
+        font-size: 0.875rem;
+        background-color: $badge-background;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.25rem;
+        margin-right: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .feed-actions {
       display: flex;
       align-items: center;
       justify-content: center;
 
       .btn {
+        width: calc(50% - 0.5rem);
+
         &:first-child {
-          margin-right: 10px;
+          margin-right: 0.5rem;
         }
 
         &:last-child {
-          margin-left: 10px;
+          margin-left: 0.5rem;
         }
-
-        width: calc(50% - 10px);
-      }
-    }
-
-    .badges {
-      .badge {
-        background: rgba($color: $theme-color, $alpha: 0.9) !important;
-        padding: 8px 10px;
-        font-size: 12px;
-        font-weight: 400;
-        margin-right: 6px;
-        margin-bottom: 6px;
-        border-radius: 4px;
       }
     }
   }

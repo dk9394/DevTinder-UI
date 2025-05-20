@@ -1,5 +1,14 @@
 @import "./../../../../styles.scss";
 
+$brand-color: $theme2-color-dark-1;
+$dropdown-color: $light-color-dark-1;
+$dropdown-background: $theme-color-light-2;
+$dropdown-background-hover: $theme-color-light-1;
+
+.navbar {
+  background: none;
+}
+
 .navbar-collapse {
   justify-content: flex-end;
 
@@ -9,7 +18,7 @@
 }
 
 .navbar-brand {
-  color: orange;
+  color: $brand-color;
 }
 
 .profile-dropdown {
@@ -17,11 +26,16 @@
   align-items: center;
 
   .profile-icon {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     overflow: hidden;
-    margin-left: 20px;
+    margin-left: 1.25rem;
+    display: none;
+
+    @media screen and (min-width: 992px) {
+      display: block;
+    }
 
     img {
       max-width: 100%;
@@ -34,19 +48,21 @@
 }
 
 .dropdown-menu {
-  background-color: lighten($color: $theme-color, $amount: 12%);
+  background-color: $dropdown-background;
 
-  a {
-    color: #fff;
+  .dropdown-item {
+    color: $dropdown-color;
+    font-family: inherit;
+    font-weight: 200;
 
     &:hover {
-      background-color: lighten($color: $theme-color, $amount: 5%);
+      background-color: $dropdown-background-hover;
     }
   }
 }
 
 @media screen and (min-width: 992px) {
   .regular-nav-links {
-    margin-left: 50px;
+    margin-left: 4rem;
   }
 }

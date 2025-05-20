@@ -14,6 +14,7 @@ import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { appEffects, appReducers } from './store';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent],
@@ -23,6 +24,7 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
     HttpClientModule,
     CoreModule,
     AuthModule,
+    SharedModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot(appEffects),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
