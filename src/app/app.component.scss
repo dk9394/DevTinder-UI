@@ -1,14 +1,32 @@
+@import "../styles.scss";
+
+$app-header-bg: $theme-color;
+$app-main-bg: $theme-color-light-3;
+$app-footer-bg: $theme-color-light-2;
+$app-footer-color: $light-color;
+
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
 
+  .app-header {
+    background-color: $app-header-bg;
+  }
+
   .app-main {
     flex: 1;
-    padding: 50px 0;
+    background: $app-main-bg;
+    // background: rgba($color: $theme-color, $alpha: 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .app-footer {
+    // background: rgba($color: $theme-color, $alpha: 0.9);
+    background: $app-footer-bg;
+    color: $app-footer-color;
     hr {
       margin: 0;
     }

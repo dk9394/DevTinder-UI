@@ -1,0 +1,11 @@
+<section class="section-placeholder container">
+  <h1 class="p-title">
+    <ng-content select="[header]"></ng-content>
+  </h1>
+  <main [class.no-padding]="noPadding" class="p-body">
+    <ng-content select="[main]"></ng-content>
+  </main>
+  <div class="p-footer">
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</section>

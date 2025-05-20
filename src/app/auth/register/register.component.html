@@ -1,132 +1,145 @@
-<section class="login container">
-  <div class="row">
-    <div class="col-lg-4">
-      <h1>Register</h1>
-      <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
-        <div class="mb-3">
-          <label for="registerFirstName" class="form-label">First Name</label>
-          <input
-            type="text"
-            id="registerFirstName"
-            name="firstName"
-            class="form-control"
-            [class.is-invalid]="showFieldError(firstNameField)"
-            formControlName="firstName"
-            placeholder="Enter your first name"
-            required
-          />
-          <div class="invalid-feedback" *ngIf="showFieldError(firstNameField)">
-            <span *ngIf="firstNameField?.errors?.['required']">
-              First name is required.
-            </span>
-            <span *ngIf="firstNameField?.errors?.['minlength']">
-              Minimum 3 characters are required.
-            </span>
-            <span *ngIf="firstNameField?.errors?.['maxlength']">
-              Maximum 20 characters are allowed.
-            </span>
+<app-placeholder>
+  <ng-container header>Register</ng-container>
+  <ng-container main>
+    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <app-form-details-container>
+        <ng-container form-body>
+          <div class="mb-3">
+            <label for="registerFirstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              id="registerFirstName"
+              name="firstName"
+              class="form-control"
+              [class.is-invalid]="showFieldError(firstNameField)"
+              formControlName="firstName"
+              placeholder="Enter your first name"
+              required
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="showFieldError(firstNameField)"
+            >
+              <span *ngIf="firstNameField?.errors?.['required']">
+                First name is required.
+              </span>
+              <span *ngIf="firstNameField?.errors?.['minlength']">
+                Minimum 3 characters are required.
+              </span>
+              <span *ngIf="firstNameField?.errors?.['maxlength']">
+                Maximum 20 characters are allowed.
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="registerLastName" class="form-label">Last Name</label>
-          <input
-            type="text"
-            id="registerLastName"
-            name="lastName"
-            class="form-control"
-            [class.is-invalid]="showFieldError(lastNameField)"
-            formControlName="lastName"
-            placeholder="Enter your last name"
-            required
-          />
-          <div class="invalid-feedback" *ngIf="showFieldError(lastNameField)">
-            <span *ngIf="lastNameField?.errors?.['required']">
-              Last name is required.
-            </span>
-            <span *ngIf="lastNameField?.errors?.['minlength']">
-              Minimum 3 characters are required.
-            </span>
-            <span *ngIf="lastNameField?.errors?.['maxlength']">
-              Maximum 20 characters are allowed.
-            </span>
+          <div class="mb-3">
+            <label for="registerLastName" class="form-label">Last Name</label>
+            <input
+              type="text"
+              id="registerLastName"
+              name="lastName"
+              class="form-control"
+              [class.is-invalid]="showFieldError(lastNameField)"
+              formControlName="lastName"
+              placeholder="Enter your last name"
+              required
+            />
+            <div class="invalid-feedback" *ngIf="showFieldError(lastNameField)">
+              <span *ngIf="lastNameField?.errors?.['required']">
+                Last name is required.
+              </span>
+              <span *ngIf="lastNameField?.errors?.['minlength']">
+                Minimum 3 characters are required.
+              </span>
+              <span *ngIf="lastNameField?.errors?.['maxlength']">
+                Maximum 20 characters are allowed.
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="registerEmailId" class="form-label">Email address</label>
-          <input
-            type="email"
-            id="registerEmailId"
-            name="emailId"
-            class="form-control"
-            [class.is-invalid]="showFieldError(emailIdField)"
-            formControlName="emailId"
-            placeholder="Enter your email"
-            required
-          />
-          <div class="invalid-feedback" *ngIf="showFieldError(emailIdField)">
-            <span *ngIf="emailIdField?.errors?.['required']">
-              Email is required.
-            </span>
-            <span *ngIf="emailIdField?.errors?.['email']">
-              Please enter a valid email address.
-            </span>
+          <div class="mb-3">
+            <label for="registerEmailId" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              id="registerEmailId"
+              name="emailId"
+              class="form-control"
+              [class.is-invalid]="showFieldError(emailIdField)"
+              formControlName="emailId"
+              placeholder="Enter your email"
+              required
+            />
+            <div class="invalid-feedback" *ngIf="showFieldError(emailIdField)">
+              <span *ngIf="emailIdField?.errors?.['required']">
+                Email is required.
+              </span>
+              <span *ngIf="emailIdField?.errors?.['email']">
+                Please enter a valid email address.
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="registerPassword" class="form-label">Password</label>
-          <input
-            type="password"
-            id="registerPassword"
-            name="password"
-            class="form-control"
-            [class.is-invalid]="showFieldError(passwordField)"
-            formControlName="password"
-            placeholder="Enter your password"
-            required
-          />
-          <div class="invalid-feedback" *ngIf="showFieldError(passwordField)">
-            <span *ngIf="passwordField?.errors?.['required']">
-              Password is required.
-            </span>
-            <span *ngIf="passwordField?.errors?.['minlength']">
-              Minimum 6 characters are required.
-            </span>
+          <div class="mb-3">
+            <label for="registerPassword" class="form-label">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              name="password"
+              class="form-control"
+              [class.is-invalid]="showFieldError(passwordField)"
+              formControlName="password"
+              placeholder="Enter your password"
+              required
+            />
+            <div class="invalid-feedback" *ngIf="showFieldError(passwordField)">
+              <span *ngIf="passwordField?.errors?.['required']">
+                Password is required.
+              </span>
+              <span *ngIf="passwordField?.errors?.['minlength']">
+                Minimum 6 characters are required.
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="registerConfirmPassword" class="form-label"
-            >Confirm Password</label
+          <div class="mb-3">
+            <label for="registerConfirmPassword" class="form-label"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              id="registerConfirmPassword"
+              name="confirmPassword"
+              class="form-control"
+              [class.is-invalid]="showFieldError(confirmPasswordField)"
+              formControlName="confirmPassword"
+              placeholder="Confirm your password"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="showFieldError(confirmPasswordField)"
+            >
+              <span
+                *ngIf="confirmPasswordField?.errors?.['passwordMatchError']"
+              >
+                Password is not matching.
+              </span>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container form-footer>
+          <button
+            type="submit"
+            class="btn btn-lg"
+            [disabled]="!registerForm.valid"
           >
-          <input
-            type="password"
-            id="registerConfirmPassword"
-            name="confirmPassword"
-            class="form-control"
-            [class.is-invalid]="showFieldError(confirmPasswordField)"
-            formControlName="confirmPassword"
-            placeholder="Confirm your password"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="showFieldError(confirmPasswordField)"
-          >
-            <span *ngIf="confirmPasswordField?.errors?.['passwordMatchError']">
-              Password is not matching.
-            </span>
-          </div>
-        </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="!registerForm.valid"
-        >
-          Register
-        </button>
-        <p>
-          Already have an account? Please
-          <a [routerLink]="['../', 'login']">Login</a> here.
-        </p>
-      </form>
-    </div>
-  </div>
-</section>
+            Register
+          </button>
+        </ng-container>
+      </app-form-details-container>
+    </form>
+  </ng-container>
+  <ng-container footer>
+    <p class="text-center">
+      Already have an account? Please
+      <a [routerLink]="['../', 'login']">Login</a> here.
+    </p>
+  </ng-container>
+</app-placeholder>

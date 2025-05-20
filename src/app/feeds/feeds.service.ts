@@ -8,6 +8,9 @@ import { IFeedsResponse } from '../models/user.model';
   providedIn: 'root',
 })
 export class FeedsService {
+  page: number = 1;
+  limit: number = 6;
+
   private get _feeds() {
     return '/feeds';
   }
@@ -19,6 +22,8 @@ export class FeedsService {
   constructor(private apiService: ApiService) {}
 
   fetchFeeds(): Observable<IFeedsResponse> {
-    return this.apiService.get(this.feedsEndpoints.feeds);
+    return this.apiService.get(this.feedsEndpoints.feeds, {
+      params: { page: this.page, limit: this.limit },
+    });
   }
 }

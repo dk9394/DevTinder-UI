@@ -1,0 +1,25 @@
+@import "./../../../../styles.scss";
+
+$label-color: $light-color-dark-3;
+
+.form-details-container {
+  .fdc-body {
+    ::ng-deep label {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: $label-color;
+    }
+  }
+
+  .fdc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+
+    ::ng-deep button {
+      min-width: calc(50% - 2rem);
+      margin: 0 0.5rem;
+    }
+  }
+}

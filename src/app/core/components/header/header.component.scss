@@ -1,5 +1,24 @@
+@import "./../../../../styles.scss";
+
+$brand-color: $theme2-color-dark-1;
+$dropdown-color: $light-color-dark-1;
+$dropdown-background: $theme-color-light-2;
+$dropdown-background-hover: $theme-color-light-1;
+
+.navbar {
+  background: none;
+}
+
 .navbar-collapse {
   justify-content: flex-end;
+
+  &.loggedIn {
+    justify-content: space-between;
+  }
+}
+
+.navbar-brand {
+  color: $brand-color;
 }
 
 .profile-dropdown {
@@ -7,11 +26,16 @@
   align-items: center;
 
   .profile-icon {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     overflow: hidden;
-    margin-left: 20px;
+    margin-left: 1.25rem;
+    display: none;
+
+    @media screen and (min-width: 992px) {
+      display: block;
+    }
 
     img {
       max-width: 100%;
@@ -21,4 +45,24 @@
 
 .logout {
   cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color: $dropdown-background;
+
+  .dropdown-item {
+    color: $dropdown-color;
+    font-family: inherit;
+    font-weight: 200;
+
+    &:hover {
+      background-color: $dropdown-background-hover;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .regular-nav-links {
+    margin-left: 4rem;
+  }
 }
