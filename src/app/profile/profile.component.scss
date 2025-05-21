@@ -1,10 +1,49 @@
-@import "../../../styles.scss";
+@import "../../styles.scss";
 
 $age-gender-color: $light-color-dark-4;
 $badge-background: $theme-color-light-3;
 
-.highlight {
-  color: $theme2-color-dark-3;
+$transform-calc: calc(50% + 1rem);
+
+.profile-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .edit-form {
+    min-width: 500px;
+    visibility: hidden;
+  }
+
+  &.split {
+    .edit-form {
+      visibility: visible;
+    }
+
+    .profile {
+      transform: translateX(0) !important;
+
+      &:first-child {
+        margin-right: 1rem;
+        transition: all 300ms ease-in-out;
+      }
+
+      &:last-child {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .profile {
+    &:first-child {
+      transform: translateX(50%);
+    }
+
+    &:last-child {
+      transition: all 300ms ease-in-out;
+      transform: translateX(-50%);
+    }
+  }
 }
 
 .feed {

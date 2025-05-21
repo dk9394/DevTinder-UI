@@ -1,0 +1,18 @@
+<section class="profile-wrapper" [class.split]="isEditMode">
+  <app-profile-edit
+    class="profile edit-form"
+    [profile]="profile"
+    (onProfileUpdate)="onProfileUpdate($event)"
+  >
+  </app-profile-edit>
+  <app-user class="profile" [user]="profile">
+    <span *ngIf="isEditMode" user-title>Preview</span>
+    <p user-footer>
+      Click here to
+      <a class="a-non-link" (click)="onEdit()">
+        <span *ngIf="!isEditMode">Edit</span>
+        <span *ngIf="isEditMode">Cancel</span>
+      </a>
+    </p>
+  </app-user>
+</section>

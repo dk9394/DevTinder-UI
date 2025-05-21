@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
 import { IUser } from 'src/app/models/user.model';
 
 @Component({
-  selector: 'app-feed',
-  templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss'],
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
 })
-export class FeedComponent implements OnInit {
-  @Input() feed!: IUser;
+export class UserComponent implements OnInit {
+  @Input() user!: IUser | null;
+  @Input() userActions: boolean = false;
   @Output() onUserInteraction = new EventEmitter();
 
   ngOnInit(): void {}

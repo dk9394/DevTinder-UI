@@ -34,9 +34,22 @@ body {
   color: $light-color;
   font-size: 100%;
 
-  a {
+  a,
+  .a-non-link {
     color: $theme2-color-dark-1;
+    cursor: pointer;
   }
+}
+
+input {
+  &:read-only {
+    cursor: not-allowed;
+  }
+}
+
+.highlight {
+  font-weight: 500;
+  color: $theme2-color-dark-3;
 }
 
 $button-color: $light-color-dark-1;
@@ -51,7 +64,8 @@ $button-background-darker: $theme2-color-dark-6;
 
   &:hover,
   &:active,
-  &:focus {
+  &:focus,
+  &:disabled {
     background-color: $button-background-darker !important;
   }
 
@@ -73,7 +87,8 @@ $button-background-darker: $theme2-color-dark-6;
 
   &:hover,
   &:active,
-  &:focus {
+  &:focus,
+  &:disabled {
     background: darken($button-color, 20%) !important;
     color: $button-background !important;
   }

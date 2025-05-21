@@ -13,15 +13,15 @@ import {
 } from './user.actions';
 import { ILoginResponse, ILogoutResponse } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
-import { IUserResponse } from 'src/app/models/user.model';
+import { IProfileResponse } from 'src/app/models/user.model';
+import { ProfileService } from 'src/app/profile/profile.service';
 
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private userService: UserService
+    private profileService: ProfileService
   ) {}
 
   loadUser$ = createEffect(() => {
@@ -47,12 +47,12 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(loadUserOnAppLoad),
       switchMap((action) => {
-        return this.userService.fetchProfile().pipe(
-          map((userResponse: IUserResponse) => {
+        return this.profileService.fetchProfile().pipe(
+          map((profileResponse: IProfileResponse) => {
             this.authService.setUserStatus();
             return addUserSuccess({
-              data: userResponse.data,
-              message: userResponse.userMessage,
+              data: profileResponse.data,
+              message: profileResponse.userMessage,
             });
           }),
           catchError((error) => {

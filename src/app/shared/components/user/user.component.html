@@ -1,0 +1,48 @@
+<section class="content">
+  <app-placeholder [noPadding]="true">
+    <ng-container header>
+      <ng-content select="[user-title]"></ng-content>
+    </ng-container>
+    <ng-container main>
+      <section class="user" *ngIf="!!user">
+        <section class="picture">
+          <img
+            [src]="user.profileIconUrl"
+            class="card-img-top"
+            [alt]="user.firstName"
+          />
+        </section>
+        <section class="user-body">
+          <h5 class="title">{{ user.firstName }} {{ user.lastName }}</h5>
+          <h6 class="age-gender">
+            <span class="age" *ngIf="user.age">{{ user.age }} Yrs</span>
+            <span class="gender highlight">{{ user.gender | titlecase }}</span>
+          </h6>
+          <p class="about">
+            {{ user.about }}
+          </p>
+          <div class="badges">
+            <span *ngFor="let skill of user.skills" class="badge">{{
+              skill
+            }}</span>
+          </div>
+          <div class="user-actions" *ngIf="userActions">
+            <button type="button" class="btn btn-lg" (click)="onInterested()">
+              Interested
+            </button>
+            <button
+              type="button"
+              class="btn btn-holo btn-lg"
+              (click)="onIgnore()"
+            >
+              Ignore
+            </button>
+          </div>
+        </section>
+      </section>
+    </ng-container>
+    <ng-container footer>
+      <ng-content select="[user-footer]"></ng-content>
+    </ng-container>
+  </app-placeholder>
+</section>
