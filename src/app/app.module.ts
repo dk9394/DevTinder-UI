@@ -10,8 +10,6 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CoreModule } from './core/core.module';
-import { ApiService } from './services/api.service';
-import { AuthService } from './services/auth.service';
 import { appEffects, appReducers } from './store';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { SharedModule } from './shared/shared.module';
@@ -30,8 +28,6 @@ import { SharedModule } from './shared/shared.module';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
-    ApiService,
-    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

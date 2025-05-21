@@ -1,7 +1,13 @@
-<div class="feeds container">
-  <app-feed
+<div class="feeds content">
+  <app-user
     class="feed"
-    [feed]="feed"
+    [user]="feed"
+    [userActions]="true"
     (onUserInteraction)="setNextFeed()"
-  ></app-feed>
+  >
+    <span user-title
+      ><span class="highlight">{{ feed.firstName }}</span
+      >'s profile</span
+    >
+  </app-user>
 </div>

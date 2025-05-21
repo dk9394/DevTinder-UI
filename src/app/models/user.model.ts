@@ -16,6 +16,10 @@ export interface IUser {
   updatedAt: string;
 }
 
+export interface IProfile extends IUser {}
+
 export interface IUserResponse extends IApiResponse<IUser> {}
 
 export interface IFeedsResponse extends IApiResponse<IUser[]> {}
+
+export interface IProfileResponse extends IApiResponse<IUser> {}

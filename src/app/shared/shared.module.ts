@@ -3,10 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 import { FormDetailsContainerComponent } from './components/form-details-container/form-details-container.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
-  declarations: [PlaceholderComponent, FormDetailsContainerComponent],
+  declarations: [
+    PlaceholderComponent,
+    FormDetailsContainerComponent,
+    UserComponent,
+  ],
   imports: [CommonModule],
-  exports: [PlaceholderComponent, FormDetailsContainerComponent],
+  exports: [PlaceholderComponent, FormDetailsContainerComponent, UserComponent],
 })
 export class SharedModule {}

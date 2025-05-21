@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { WelcomeComponent } from './welcome/welcome.component';
-import { PlaceholderComponent } from './shared/components/placeholder/placeholder.component';
 
 const routes: Routes = [
   {
@@ -13,6 +12,11 @@ const routes: Routes = [
     path: 'feeds',
     loadChildren: () =>
       import('./feeds/feeds.module').then((m) => m.FeedsModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },

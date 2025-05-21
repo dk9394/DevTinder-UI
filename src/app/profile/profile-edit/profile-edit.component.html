@@ -1,0 +1,204 @@
+<section class="content">
+  <app-placeholder>
+    <ng-container header>Edit</ng-container>
+    <ng-container main>
+      <form (ngSubmit)="onSubmit()" [formGroup]="editForm">
+        <app-form-details-container>
+          <ng-container form-body>
+            <div class="mb-3">
+              <label for="editFirstName" class="form-label">First Name</label>
+              <input
+                type="text"
+                id="editFirstName"
+                name="firstName"
+                class="form-control"
+                [class.is-invalid]="showFieldError(firstNameField)"
+                formControlName="firstName"
+                placeholder="Enter your first name"
+                required
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="showFieldError(firstNameField)"
+              >
+                <span *ngIf="firstNameField?.errors?.['required']">
+                  First name is required.
+                </span>
+                <span *ngIf="firstNameField?.errors?.['minlength']">
+                  Minimum 3 characters are required.
+                </span>
+                <span *ngIf="firstNameField?.errors?.['maxlength']">
+                  Maximum 20 characters are allowed.
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="editLastName" class="form-label">Last Name</label>
+              <input
+                type="text"
+                id="editLastName"
+                name="lastName"
+                class="form-control"
+                [class.is-invalid]="showFieldError(lastNameField)"
+                formControlName="lastName"
+                placeholder="Enter your last name"
+                required
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="showFieldError(lastNameField)"
+              >
+                <span *ngIf="lastNameField?.errors?.['required']">
+                  Last name is required.
+                </span>
+                <span *ngIf="lastNameField?.errors?.['minlength']">
+                  Minimum 3 characters are required.
+                </span>
+                <span *ngIf="lastNameField?.errors?.['maxlength']">
+                  Maximum 20 characters are allowed.
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="editEmailId" class="form-label">Email address</label>
+              <input
+                type="email"
+                id="editEmailId"
+                name="emailId"
+                class="form-control"
+                formControlName="emailId"
+                readonly
+              />
+            </div>
+            <div class="mb-3">
+              <label for="editAge" class="form-label">Age</label>
+              <input
+                type="number"
+                id="editAge"
+                name="age"
+                class="form-control"
+                [class.is-invalid]="showFieldError(ageField)"
+                formControlName="age"
+                placeholder="Enter your age"
+                required
+              />
+              <div class="invalid-feedback" *ngIf="showFieldError(ageField)">
+                <span *ngIf="ageField?.errors?.['required']">
+                  Age is required.
+                </span>
+                <span *ngIf="ageField?.errors?.['min']">
+                  Should be minimum 18 yrs old.
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="editGender" class="form-label">Gender</label>
+              <select
+                id="editGender"
+                name="gender"
+                class="form-control"
+                [class.is-invalid]="showFieldError(genderField)"
+                formControlName="gender"
+                required
+              >
+                <option value="" selected>Select your Gender</option>
+                <option *ngFor="let gender of allowedGenders" [value]="gender">
+                  {{ gender | titlecase }}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="showFieldError(genderField)">
+                <span *ngIf="genderField?.errors?.['required']">
+                  Gender is required.
+                </span>
+                <span *ngIf="genderField?.errors?.['min']">
+                  Only male, female or other.
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="editAbout" class="form-label">About</label>
+              <textarea
+                name="about"
+                id="editAbout"
+                class="form-control"
+                [class.is-invalid]="showFieldError(aboutField)"
+                formControlName="about"
+                placeholder="Enter about yourself"
+                required
+              ></textarea>
+
+              <div class="invalid-feedback" *ngIf="showFieldError(aboutField)">
+                <span *ngIf="aboutField?.errors?.['required']">
+                  About yourself is required.
+                </span>
+                <span *ngIf="aboutField?.errors?.['minlength']">
+                  Minimum 6 characters are required.
+                </span>
+
+                <span *ngIf="aboutField?.errors?.['maxlength']">
+                  Maximum 100 characters are allowed.
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="editProfileIconUrl" class="form-label"
+                >Profile Image URL</label
+              >
+              <input
+                type="text"
+                id="editProfileIconUrl"
+                name="profileIconUrl"
+                class="form-control"
+                [class.is-invalid]="showFieldError(profileIconUrlField)"
+                formControlName="profileIconUrl"
+                placeholder="Enter your profile image URL"
+                required
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="showFieldError(profileIconUrlField)"
+              >
+                <span *ngIf="profileIconUrlField?.errors?.['required']">
+                  Image URL is required.
+                </span>
+              </div>
+            </div>
+
+            <!-- <div class="mb-3">
+              <label for="editSkills" class="form-label"
+                >Professional Skills</label
+              >
+              <input
+                type="text"
+                id="editSkills"
+                name="skills"
+                class="form-control"
+                [class.is-invalid]="showFieldError(skillsField)"
+                formControlName="skills"
+                placeholder="Enter your skills"
+
+              />
+              <div class="invalid-feedback" *ngIf="showFieldError(skillsField)">
+                <span *ngIf="skillsField?.errors?.['maxlength']">
+                  Minimum 10 skills are allowed.
+                </span>
+              </div>
+            </div> -->
+          </ng-container>
+          <ng-container form-footer>
+            <button
+              type="submit"
+              class="btn btn-lg"
+              [disabled]="!editForm.valid"
+            >
+              Save
+            </button>
+          </ng-container>
+        </app-form-details-container>
+      </form>
+    </ng-container>
+  </app-placeholder>
+</section>
